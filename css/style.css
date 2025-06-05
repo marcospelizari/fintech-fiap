@@ -9,6 +9,10 @@ main {
     height: 50vh;
 }
 
+.vh-auto {
+    height: auto;
+}
+
 .logo {
     font-family: "Poppins", sans-serif;
 }
@@ -46,3 +50,4 @@ main {
     font-family: "Poppins", sans-serif;
     font-size: 18px;
 }
+
