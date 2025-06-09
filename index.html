@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <!-- Script Google Chart -->
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
     // Load the Visualization API and the corechart package.
@@ -34,7 +34,7 @@
 
     var options = {
         chart: {
-        title: 'Inflação Pessoal'
+            title: 'Inflação Pessoal'
         }
     };
 
@@ -42,75 +42,99 @@
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
+    google.charts.setOnLoadCallback(drawResumoFinanceiroChart);
+
+    function drawResumoFinanceiroChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Tipo', 'Total'],
+            ['Recebimentos', 3000],
+            ['Gastos', 2500]
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Resumo Financeiro',
+                subtitle: 'Recebimentos vs Gastos'
+            },
+            bars: 'vertical',
+            vAxis: { format: 'decimal', title: 'Valor (R$)' },
+            height: 300,
+            colors: ['#4A90E2', '#A4C8E1'],
+            backgroundColor: '#FFFFFF',
+            isStacked: false
+        };
+
+    
+        var chart = new google.charts.Bar(document.getElementById('resumofinanceiro_chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
     </script>
   </head>
-  <body>
-    
+  <body class="d-flex flex-column min-vh-100">
+    <div class="logo-container">
+        <h1 class="logo ms-3"><strong>InflaPessoal</strong></h1>
+    </div>
+
+    <!-- Barra de Navegação Horizontal -->
     <nav class="navbar navbar-expand-lg barra-superior">
         <div class="container-fluid">
-            <h1 class="logo"><strong>InflaPessoal</strong></h1>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link barra-lateral me-2" href="#"><i class="bi bi-house-door"></i> DashBoard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link barra-lateral me-2" href="#"><i class="bi bi-plus-circle"></i> Cadastrar Recebimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link barra-lateral me-2" href="#"><i class="bi bi-cart"></i> Cadastrar Gastos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link barra-lateral me-2" href="#"><i class="bi bi-graph-up"></i> Ver Inflação Pessoal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link barra-lateral me-2" href="#"><i class="bi bi-wallet"></i> Ajustar Orçamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger me-2" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Barra Lateral -->
-            <ul class="container-fluid nav flex-column pt-4 col-2 vh-100">
-                <li class="nav-item row align-items-center custom-border">
-                    <a class="col nav-link p-2 barra-lateral logo text-start" aria-current="page" href="#">
-                        <i class="col bi bi-house-door col-sm-1 ms-3"></i>
-                        DashBoard
-                    </a>
-                </li>
-                <li class="nav-item row align-items-center custom-border">
-                    <a class="col nav-link p-2 barra-lateral logo text-start" href="#">
-                        <i class="col bi bi-plus-circle col-sm-1 ms-3"></i>
-                        Cadastrar Recebimentos
-                    </a>
-                </li>
-                <li class="nav-item row align-items-center custom-border">
-                    <a class="col nav-link p-2 barra-lateral logo" href="#">
-                        <i class="col bi bi-cart col-sm-1 ms-3"></i>
-                        Cadastrar Gastos
-                    </a>
-                </li>
-                <li class="nav-item row align-items-center custom-border">
-                    <a class="col nav-link p-2 barra-lateral logo" href="#">
-                        <i class="col bi bi-graph-up col-sm-1 ms-3"></i>
-                        Ver Inflação Pessoal
-                    </a>
-                </li>
-                <li class="nav-item row align-items-center custom-border">
-                    <a class="col nav-link p-2 barra-lateral logo " href="#">
-                        <i class="col bi bi-wallet col-sm-1 ms-3"></i>
-                        Ajustar Orçamento
-                    </a>
-                </li>
-                <li class="nav-item row align-items-center">
-                    <a class="col nav-link text-danger p-2 logo" href="#">
-                        <i class="col bi bi-box-arrow-right col-sm-1 ms-3"></i>
-                        Sair
-                    </a>
-                </li>
-            </ul>
-            <!-- Fina Barra Lateral -->
-            <main class="col container">
-                <h1 class="justify-content-md-center text-secondary main-text mt-3 ms-3"><strong>Bem-vindo(a) ao InflaPessoal</strong></h1>
-                <div class="row gx-5 text-center border vh-50 m-3 bg-white">
-                        <div class="col border p-3">
-                            <i class="bi bi-bar-chart-fill"></i>
-                            <strong>Sua Inflação Pessoal</strong>
-                            <div class="mx-auto pt-5" id="columnchart_material" style="width: 500px; height: 300px;"></div>
-                        </div>
-                            
-                        <div class="col border p-3"><strong>Resumo Financeiro</strong></div>
+    <!-- Fim Barra Lateral -->
+    <main class="col p-3">
+        <h3 class="text-secondary main-text mt-1 ms-3"><strong>Bem-vindo(a) ao InflaPessoal</strong></h3>
+        <div class="row gx-5 text-center border m-3 bg-white">
+                <div class="col border p-3">
+                    <i class="bi bi-bar-chart-fill"></i>
+                    <strong>Sua Inflação Pessoal</strong>
+                    <div class="mx-auto pt-3" id="columnchart_material" style="width: 500px; height: 300px;"></div>
                 </div>
-            </main>
-            <div class="card-footer text-center m-auto"><strong>Todos os direitos reservados</strong></div>
+                    
+                <div class="col border p-3"><strong>Resumo Financeiro</strong>
+                <div class="mx-auto pt-3" id="resumofinanceiro_chart" style="width: 500px; height: 300px;"></div>
+                </div>
         </div>
-    </div>
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <button class="col border p-2 cadastrar m-2">
+                Cadastrar Recebimentos
+                </button>
+                <button class="col border p-2 cadastrar m-2">
+                Cadastrar Gastos
+                </button>
+                <button class="col border p-2 inflacaoPessoal m-2">
+                Ver Inflação Pessoal
+                </button>
+            </div>
+        </div>
+    </main> 
+    <footer class="card-footer text-center m-auto"><strong>Todos os direitos reservados</strong></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   </body>
